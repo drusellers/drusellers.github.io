@@ -1,0 +1,77 @@
+---
+layout: default
+logo: logo-black
+bodyId: home
+---
+
+<div class="container">
+  <div class="imgbar">
+    <img src="/images/dru-serious-2x600.png" />
+  </div><!-- /imgbar -->
+
+  <div style="clear:both;"></div>
+
+  <div class="thing">
+      <blockquote>Business Architecture and Software</blockquote>
+  </div>
+
+  <div class="latestPost">
+    <h2><small>Latest</small> Post</h2>
+
+    {% assign post = site.posts | first %}
+
+    <h3>{{ post.title }}</h3>
+
+    <small class="datetime muted">{{ post.date | date_to_string }}</small>
+
+    {{post.excerpt}}
+
+  </div>
+
+  <div class="role">
+    {% include intro.html %}
+  </div>
+
+  <div class="role">
+    <h2><small>Some</small> Personal</h2>
+    <p>
+      I also spend an inordinate amount of time working out, trying to
+      stay in shape so that I can keep coding for as long as
+      possible. I coded up a <a href="/prs">pr board</a> for
+      myself.
+    </p>
+    <ul class="resources">
+      <li><a href="http://github.com/drusellers">github.com/drusellers</a></li>
+      <li><a href="/resume">resume</a></li>
+      <li><a href="/prs">My PR Board</a></li>
+      <li><a href="/iron">Iron and the Soul</a></li>
+      <li><a href="http://drusellers.tumblr.com">Quotes</a></li>
+      <li><a href="/posts">Blog</a></li>
+    </ul>
+  </div>
+
+  <div style="clear:both;"></div>
+
+  <div class="quotes">
+    <ul>
+      <li>
+        <h3>A little zen</h3>
+        <p>Water is fluid, soft and yielding. But water will wear away rock,
+          which is rigid and cannot yield. As a rule, whatever is fluid, soft
+          and yielding will overcome whatever is rigid and hard. This is another
+          paradox: what is soft is strong.</p>
+        <p><em>Lao-tzu</em></p>
+      </li>
+      <li>
+        <h3>The Grind is the Glam</h3>
+        <p>Live for the moment! Do what you love. If you can
+        acheive this then the grind will be glamourous. Just as it
+        seems glamourous to me what rock stars get to do everyday I
+        know that to them its just another day in the grind. So if
+        you are going to have to do the work, it should at least be
+        something you love.</p>
+        <p><em>Me via Jeff McKinney and Carl Paoli</em></p>
+      </li>
+    </ul>
+  </div>
+</div>

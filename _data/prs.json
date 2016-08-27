@@ -1,0 +1,34 @@
+[
+            {
+                "movement": "Deadlift",
+                "score": "385"
+            },
+            {
+                "movement": "Backsquat",
+                "score": "325"
+            },
+            {
+                "movement": "Press",
+                "score": "155"
+            },
+            {
+                "movement": "Clean",
+                "score": "260"
+            },
+            {
+                "movement": "Snatch",
+                "score": "205"
+            },
+            {
+                "movement": "Front Squat",
+                "score": "300"
+            },
+            {
+                "movement": "Jerk",
+                "score": "255"
+            },
+            {
+                "movement": "Benchpress",
+                "score": "225"
+            }
+        ]

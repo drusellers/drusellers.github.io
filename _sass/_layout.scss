@@ -1,0 +1,71 @@
+$break-small: 320px; //the smallest part of iPhone
+$break-large: 700px;
+
+body {
+  background:none;
+  color: $copy_color;
+  padding-bottom: 0;
+  margin:0;
+}
+
+@mixin respond-to($media) {
+  @if $media == handhelds {
+    @media only screen and (max-width: $break-small) { @content; }
+  }
+  @else if $media == medium-screens {
+    @media only screen and (min-width: $break-small + 1) and (max-width: $break-large - 1) { @content; }
+  }
+  @else if $media == wide-screens {
+    @media only screen and (min-width: $break-large) { @content; }
+  }
+}
+
+.container {
+  margin: 0 auto;
+
+  @include respond-to(handhelds) { width:280px; }
+  @include respond-to(medium-screens) { width:400px; }
+  @include respond-to(wide-screens) { width: 600px; }
+}
+
+
+
+.header {
+    margin-top:2em;
+
+    .logo {
+      @include respond-to(handhelds) { width:100%; }
+      @include respond-to(medium-screens) { @include full(); }
+      @include respond-to(wide-screens) { @include column(8); }
+
+    }
+    .details {
+      @include respond-to(handhelds) { display:none; }
+      @include respond-to(medium-screens) { display:none; }
+      @include respond-to(wide-screens) { @include column(4); }
+
+      font-size:0.92em;
+      text-align:right;
+    }
+}
+
+.footer {
+    background-color: $footer_background_color;
+    margin-top: 20px;
+    padding-top: 5px;
+    overflow:hidden;
+
+    h3 {
+        color:#588c8c;
+    }
+
+    img {
+        margin: 0;
+    }
+
+    .props, .boring {
+        @include respond-to(handhelds) { @include full(); }
+        @include respond-to(medium-screens) { @include full(); }
+        @include respond-to(wide-screens) { @include column(6); }
+    }
+}

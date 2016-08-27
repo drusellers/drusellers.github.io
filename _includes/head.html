@@ -1,0 +1,28 @@
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
+  <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+
+  <link rel="icon" type="image/png" href="/images/favicon.png" />
+
+  <link rel="openid.server" href="http://www.myopenid.com/server" />
+  <link rel="openid.delegate" href="http://drusellers.myopenid.com/" />
+
+  <link title="drusellers-rss" type="application/rss+xml" rel="alternate" href="http://feeds.feedburner.com/drusellers" />
+  <link title="drusellers-atom" type="application/atom+xml" rel="alternate" href="http://feeds.feedburner.com/drusellers" />
+
+  <link rel="stylesheet" href="/css/main.css" type="text/css" media="screen" />
+
+  <link rel="stylesheet" href="/css/font-awesome-4.2.0/css/font-awesome.min.css" type="text/css" media="screen" />
+
+
+  <script type="text/javascript" src="/scripts/jquery.js"></script>
+  <script type="text/javascript" src="/scripts/jquery.formalize.js"></script>
+
+  <script type="text/javascript" src="/scripts/d3.v3.js"></script>
+  <script type="text/javascript" src="/scripts/require.js"></script>
+  <script type="text/javascript" src="/scripts/loader.js"></script>
+
+</head>

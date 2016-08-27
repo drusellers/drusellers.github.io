@@ -1,0 +1,28 @@
+#prboard {
+  .header { display: none; }
+  .footer { display: none; }
+
+  background:#222;
+  background-image:url(../../images/blurry.jpg);
+
+  h1 {
+      color:#aaa;
+      margin:0;
+      font-size: 3em;
+      border-bottom:2px solid #ccc;
+  }
+
+    .main_content {
+        margin-top:50px;
+    }
+
+    .score {
+
+      h2 {
+
+      }
+      p {
+        color:#bbb;
+      }
+    }
+}

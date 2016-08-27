@@ -1,0 +1,46 @@
+---
+layout: default
+logo: logo-black
+bodyId: home
+---
+
+<div class="container">
+  <div class="imgbar">
+    <img src="/images/everest-trip.jpg" />
+  </div><!-- /imgbar -->
+
+
+  <div style="clear:both;"></div>
+  <div class="thing">
+      <blockquote>Not Everest, but one of the prettier sights.</blockquote>
+  </div>
+
+  <h1>Everest Trip</h1>
+
+  <p>Some words</p>
+
+  <h3>Elevations of the trip</h3>
+  <div>
+    <script type="text/javascript" data-module="everest">
+      {{ site.data.everest | jsonify }}
+    </script>
+  </div>
+  <table>
+  	<thead>
+  		<tr>
+  			<th>Date</th>
+  			<th>Location</th>
+  			<th>Elevation</th>
+  		</tr>
+  	</thead>
+  	<tbody>
+  		{% for stop in site.data.everest %}
+  		<tr>
+  			<td>{{stop.d}}</td>
+  			<td>{{stop.l}}</td>
+  			<td>{{stop.e}}</td>
+  		</tr>
+  		{% endfor %}
+  	</tbody>
+  </table>
+</div>

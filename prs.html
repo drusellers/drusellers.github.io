@@ -1,0 +1,48 @@
+---
+layout: default
+logo: logo-white
+bodyId: prboard
+---
+<div class="row main-content" >
+  <div class="small-12 columns">
+    <h1>Stats</h1>
+  </div>
+  <div class="large-3 small-12 columns" data-module="heartrate" data-params="{}">
+    <h2>Heartrate</h2>
+  </div>
+
+  <div class="large-9 small-12 columns" data-module="stats" data-params="{}">
+    <h2>Body Composition</h2>
+  </div>
+
+  <div class="small-12 columns">
+    <div class="stats">
+      <h2>Lifts</h2>
+
+      <ul class="large-block-grid-4 small-block-grid-2">
+        {% for pr in site.data.prs %}
+        <li class="score">
+          <h3>{{pr.movement}}</h3>
+          <p>{{pr.score}}</p>
+        </li>
+        {% endfor %}
+      </ul>
+      <div style="clear:both;"></div>
+    </div>
+  </div>
+  <div class="small-12 columns">
+    <div class="stats">
+      <h2>WODs</h2>
+
+      <ul class="large-block-grid-4 small-block-grid-2">
+        {% for wod in site.data.wods %}
+        <li class="score">
+          <h3>{{wod.name}}</h3>
+          <p>{{wod.score}}</p>
+        </li>
+        {% endfor %}
+      </ul>
+      <div style="clear:both;"></div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+---
+layout: post
+title:  "Canary"
+date:   2013-06-13 09:58:21
+categories: architecture
+---
+
+Do you have a canary in your organization?
