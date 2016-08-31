@@ -1,25 +1,31 @@
 ---
 layout: default
 ---
-<div class="container">
-<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-  <header class="post-header">
-    <h1 class="post-title" itemprop="name headline">{{ page.title }}</h1>
-    <p class="post-meta"><time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%b %-d, %Y" }}</time>{% if page.author %} • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ page.author }}</span></span>{% endif %}</p>
+<article class="pa3 pa5-ns center cf" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="w-100">
+    <h1 class="f2 f-subheadline-ns mb4" itemprop="name headline">{{ page.title }}</h1>
+    <p class="gray f6 mb4 ttu tracked"><time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%b %-d, %Y" }}</time>{% if page.author %} • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ page.author }}</span></span>{% endif %}</p>
   </header>
 
-  <div class="post-content" itemprop="articleBody">
+  <section class="fl w-75 f4 f3-ns measure lh-copy">
     {{ content }}
-  </div>
+  </section>
 
-  <div class="post-categories">
+  <section class="fr w-25">
     <h5>Categories</h5>
     <ul class="categories">
     {% for c in page.categories %}
     <li>{{c}}</li>
     {% endfor %}
     </ul>
-  </div>
+
+    <h5>Tags</h5>
+    <ul class="categories">
+    {% for c in page.tags %}
+    <li>{{c}}</li>
+    {% endfor %}
+    </ul>
+  </section>
 </article>
-</div>

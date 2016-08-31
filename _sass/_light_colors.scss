@@ -23,7 +23,8 @@ $color5:#f2d03b;
 
 //$link_color:$fresh_green;
 //$heading_color: $blue;
-$link_color:lighten(#207178,15%);
+//$link_color:lighten(#207178,15%);
+$link_color:#00f;
 $resource_link_color:$color1;
 $resource_link_bg:$grayLighter;
 $heading_color: $color3;
@@ -32,3 +33,18 @@ $background: #F4F5F5;
 $footer_background_color:none;
 
 $quote_color: $fresh_green;
+
+dl dt {
+    margin-top: 10px;
+    font-size: 120%;
+    color: $color2;
+}
+
+hr {
+    clear:both;
+    display:block;
+    margin: 20px 0 19px;
+    border:0;
+    border-bottom:1px solid $grayLighter;
+    border-style:inset;
+}

@@ -4,37 +4,34 @@ logo: logo-black
 bodyId: home
 ---
 
-<div class="container">
-  <div class="imgbar">
-    <img src="/images/dru-serious-2x600.png" />
-  </div><!-- /imgbar -->
+<div class="mw6 mw6-ns center">
+  <img class="w-100" src="/images/dru-serious-2x600.png" />
 
-  <div style="clear:both;"></div>
-
-  <div class="thing">
+  <div class="w-100 f3 mv3">
       <blockquote>Business Architecture and Software</blockquote>
   </div>
 
-  <div class="latestPost">
-    <h2><small>Latest</small> Post</h2>
+
+  <article class="w-100 latestPost mb3 pa3">
+    <h2 class="f3">Latest Post</h2>
 
     {% assign post = site.posts | first %}
 
-    <h3>{{ post.title }}</h3>
+    <h3 class="measure lh-title"><a href="{{post.url}}">{{ post.title }}</a></h3>
 
     <small class="datetime muted">{{ post.date | date_to_string }}</small>
 
     {{post.excerpt}}
 
-  </div>
+  </article>
 
-  <div class="role">
+  <div class="w-100">
     {% include intro.html %}
   </div>
 
-  <div class="role">
-    <h2><small>Some</small> Personal</h2>
-    <p>
+  <div class="w-100">
+    <h2 class="measure lh-title">A Bit About Me</h2>
+    <p class="measure lh-copy">
       I also spend an inordinate amount of time working out, trying to
       stay in shape so that I can keep coding for as long as
       possible. I coded up a <a href="/prs">pr board</a> for
@@ -50,28 +47,5 @@ bodyId: home
     </ul>
   </div>
 
-  <div style="clear:both;"></div>
-
-  <div class="quotes">
-    <ul>
-      <li>
-        <h3>A little zen</h3>
-        <p>Water is fluid, soft and yielding. But water will wear away rock,
-          which is rigid and cannot yield. As a rule, whatever is fluid, soft
-          and yielding will overcome whatever is rigid and hard. This is another
-          paradox: what is soft is strong.</p>
-        <p><em>Lao-tzu</em></p>
-      </li>
-      <li>
-        <h3>The Grind is the Glam</h3>
-        <p>Live for the moment! Do what you love. If you can
-        acheive this then the grind will be glamourous. Just as it
-        seems glamourous to me what rock stars get to do everyday I
-        know that to them its just another day in the grind. So if
-        you are going to have to do the work, it should at least be
-        something you love.</p>
-        <p><em>Me via Jeff McKinney and Carl Paoli</em></p>
-      </li>
-    </ul>
-  </div>
+  {% include quotes.html %}
 </div>

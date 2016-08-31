@@ -18,7 +18,8 @@ assembly scanning, then passes a [TypePool](% post_url 2014-09-10-typepool %}) a
 {% highlight csharp %}
 public static class AppFactory
 {
-  public static Application Build<TApplication>() where TApplication : ApplicationMarker, new()
+  public static Application Build<TApplication>()
+      where TApplication : ApplicationMarker, new()
   {
     //boot strap logging
 
