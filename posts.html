@@ -4,9 +4,9 @@ logo: logo-black
 bodyId: home
 ---
 
-<div class="mw6 mw6-ns center">
+<div class="mw6 mw6-ns center pa3">
     {% for post in site.posts where:"category":"post"%}
-    <article class="post">
+    <article>
       <h2><a href="{{post.url}}">{{ post.title }}</a></h2>
 
       <small class="datetime muted">{{ post.date | date_to_string }}</small>
