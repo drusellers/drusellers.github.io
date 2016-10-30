@@ -6,9 +6,9 @@ categories: greenpipes
 published: true
 ---
 
-Earlier this month, my colleague, [Jimmy Bogard](https://lostechies.com/jimmybogard/) posted a fantastically concise [article](https://lostechies.com/jimmybogard/2016/10/13/mediatr-pipeline-examples/) about how he composes an application pipeline for processing an application's various requests using his `MediatR` framework. He walks through step by step how he brings in each separate concern with code examples.
+Earlier this month, my colleague, [Jimmy Bogard](https://lostechies.com/jimmybogard/) posted a fantastically concise [article](https://lostechies.com/jimmybogard/2016/10/13/mediatr-pipeline-examples/) about how he composes an application pipeline for processing an application's various requests using his [MediatR](https://github.com/jbogard/MediatR) framework. He walks through step by step how he brings in each separate concern with code examples.
 
-Today, I want to try and reproduce his examples using the recently extracted pipeline from MassTransit called GreenPipes.
+Today, I want to try and reproduce his examples using the recently extracted pipeline from [MassTransit](https://github.com/masstransit/masstransit) called [GreenPipes](https://github.com/phatboyg/greenpipes).
 
 This post assumes that you have read Jimmy's post.
 
