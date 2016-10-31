@@ -86,7 +86,7 @@ The context for any GreenPipes pipeline is the heavy lifter of the data. In Mass
 
 {% gist drusellers/27c1834368ebd7fa6425b21912da8358 0_FluentValidationExtensionMethods.cs %}
 
-Like all things in MassTransit, the extensions to the core framework show up as extension methods. In this case GreenPipe's exposes some very low level functions that are pretty chatty and abstract. The recommended approach is to instead provide an extension method that papers over this complexity for your users. You can see this pattern in TopShelf, MassTransit and now GreenPipes used to a lot of benefit.
+Like all things in MassTransit, the extensions to the core framework show up as extension methods. In this case GreenPipes exposes some very low level functions that are pretty chatty and abstract. The recommended approach is to provide an extension method that papers over this complexity for your users. You can see this pattern in TopShelf, MassTransit and now GreenPipes.
 
 > This patten has been very helpful as a way for extension authors to ship new and interesting behavior without the core product having to make any changes.
 
@@ -96,11 +96,11 @@ Like all things in MassTransit, the extensions to the core framework show up as 
 
 This is one of my favorite pieces of the puzzle. GreenPipes forces you to make a specification class. This object holds the data from the extension method and allows you to populate your filter with that data. This by itself was pretty annoying for me, it felt like SRP for the sake of SRP. Until I wrote my first complex filter and came to _REALLY_ appreciate the `Validate()` method.
 
-The `Validate()` method gives you chance to validate the users input in building out filter. This is called at bus start up (_Fail Early_) Additionally, it gives you a means to report errors back to the user in a structured fashion along with every other validation failure.
+The `Validate()` method gives you a chance to validate the user's input in building out the filter. This is called at bus start up (_Fail Early_) Additionally, it gives you a means to report errors back to the user in a structured fashion along with every other validation failure.
 
 #### The Filter
 
-I know its taken a while to get here, but we have finally arrived at the actual filter. At first blush this should seem very familiar as its almost a verbatum copy of what Mr. Bogard wrote up. I'd rather instead focus on the two further differences in the GreenPipe filter.
+I know it's taken a while to get here, but we have finally arrived at the actual filter. At first blush this should seem very familiar as its almost a verbatim copy of what Mr. Bogard wrote up. I'd rather instead focus on the two further differences in the GreenPipe filter.
 
 {% gist drusellers/27c1834368ebd7fa6425b21912da8358 2_FluentValidationFilter.cs %}
 
@@ -108,18 +108,30 @@ First, we have the `Probe` method. This method provides a mechanism for dynamica
 
 {% gist drusellers/27c1834368ebd7fa6425b21912da8358 9_probe.json %}
 
-Above, we can see the results of our serilog filter, our fluentValidation filter and the inline filter that I'm using for the security filter. By taking the extra time to build our filters the GreenPipes' way we can expose a dynamically rich amount of data in a structured format. Currently, this uses JSON.Net to serialize data and you could easily use JSON.Net to then deserialize this data back into C# objects for use in your project's dashboard.
+Above, we can see the results of our Serilog filter, our FluentValidation filter and the inline filter that I'm using for the security concern. By taking the extra time to build our filters the GreenPipes' way we can expose a dynamically rich amount of data in a structured format. Currently, this uses JSON.Net to serialize data and you could easily use JSON.Net to then deserialize this data back into C# objects for use in your project's dashboard.
 
-So `Probe` is awesome. The code for Fluent Validation looks just like MediatR but what is this other pipe?? Well, one final difference between GreenPipes and MediatR is that MediatR returns. The MediatR signature is `TResponse Handle(TRequest message)` this is gloriously simple and easy to grok, another benefit of the MediatR approach. We can also see that MediatR allows you to throw exceptions so that you can catch them when invoking MediatR. GreenPipes allows for a more complex model, again out of needs born in MassTransit. But, if you are willing to pay for this extra complexity you will get the ability to _jump the tracks_. What I mean is you can exit any given pipe and start down another pipe (any one want [Railway Programming](http://fsharpforfunandprofit.com/rop/) in C#?).
+> The purpose of the probe is to allow filter authors to provide a diagnostic payload that is composable with the entire pipeline. Using this capability it's possible to see - in a running application - how the entire pipeline is constructed. Think of it as a debug view that you can access right off the pipeline using `pipe.GetProbeResult()`.
+
+The code for Fluent Validation looks just like MediatR but what is this other pipe?? Well, one final difference between GreenPipes and MediatR is that MediatR returns. The MediatR signature is `TResponse Handle(TRequest message)` this is gloriously simple and easy to grok, another benefit of the MediatR approach. We can also see that MediatR allows you to throw exceptions so that you can catch them when invoking MediatR. GreenPipes allows for a more complex model, again out of needs born in MassTransit. But, if you are willing to pay for this extra complexity you will get the ability to _jump the tracks_. What I mean is you can exit any given pipe and start down another pipe (any one want [Railway Programming](http://fsharpforfunandprofit.com/rop/) in C#?).
 
 We can see that there is this other pipe for Validation Failures. If we fail validation, we immediately stop processing (by not calling `next.Send`) and divert down the `_validationFailurePipe`. Now this is a completely different pipe that can do all manner of things. I've used it to still save my users data, but then send out an email to that user alerting them to issues (please note, I rarely write UI oriented code). MassTransit has used this to take messages that have become poisonous and divert them to a poison message queue. All of this and more and you can control just how far and deep you want to go at each level. This is the power you get in exchange for the complexity of not having a direct return value.
 
 > That said, you may be looking at me ಠ_ಠ like, "Dru, I _NEED_ return values." I completely understand and I've felt that pain. I present to you my very simple pattern for handling this. Whatever you want for a return value, just stuff it in the `cxt` variable, then if you `await` the `Send` you can pull that data back out of the `PipeContext`. BOOM.
 
-Ok, whew. That was a whole lot of content to just compare two libraries that are trying to make pipelines easier.
+## Time to sum it up.
 
-All of this said, my hat goes off to Mr. Bogard. He has created a very nice library in MediatR and I have personally enjoyed its benefits more than once.
+The goal again was to show case a different approach to building out a pipeline for your business processes. Each framework takes its own approach and brings different values and levers for you to accomplish your goal.
 
-All of the above code snippets all together
+### MediatR
 
-{% gist drusellers/27c1834368ebd7fa6425b21912da8358 %}
+- Synchronous Model by Default (pretty sure nothing is preventing you from doing TPL in `IRequestHandler` though)
+- Simple to build and get an overview of the pipeline.
+- Composed via static code
+
+### GreenPipes
+
+- Async Model by Default
+- Ability to build dynamic and complex pipelines to suit business needs
+- Full support for dynamic tracing of pipelines with `Probe` feature
+- Full support for validating filters
+- Composed via filter objects
