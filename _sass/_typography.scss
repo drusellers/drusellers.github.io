@@ -20,7 +20,7 @@ p, ul {
 
 a {
   color: $link_color;
-  text-decoration: none;
+  text-decoration:underline;
 }
 
 a.block {
@@ -28,4 +28,18 @@ a.block {
   padding: 1%;
   font-size: 140%;
   border-bottom: 1px solid #cccccc;
+}
+
+blockquote, blockquote p {
+    color: $quote_color;
+}
+
+blockquote p {
+  margin:0;
+}
+
+blockquote:before {
+    font-family: 'Lucida Grande', Verdana, helvetica, sans-serif;
+    content: open-quote; /* here we define our :before as a smart quote. It could be any content, even the HTML entity alternative to this opening quote, that is “ */
+    color: $quote_color;
 }

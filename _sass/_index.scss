@@ -1,17 +1,3 @@
-#home {
-    blockquote {
-        color: $quote_color;
-    }
-
-    blockquote:before {
-        font-family: 'Lucida Grande', Verdana, helvetica, sans-serif;
-        content: open-quote; /* here we define our :before as a smart quote. It could be any content, even the HTML entity alternative to this opening quote, that is “ */
-        color: darken($quote_color, 0.5);
-        /* text-shadow: 0 1px 1px #909090; */
-    }
-
-}
-
 .latestPost {
   background:#CDECFF;
   color: #333;

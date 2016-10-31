@@ -8,7 +8,7 @@ published: true
 
 Earlier this month, my colleague, [Jimmy Bogard](https://lostechies.com/jimmybogard/) posted a fantastically concise [article](https://lostechies.com/jimmybogard/2016/10/13/mediatr-pipeline-examples/) about how he composes an application pipeline for processing an application's various requests using his [MediatR](https://github.com/jbogard/MediatR) framework. He walks through step by step how he brings in each separate concern with code examples.
 
-Today, I will reproduce his examples using the recently extracted pipeline from [MassTransit](https://github.com/masstransit/masstransit) called [GreenPipes](https://github.com/phatboyg/greenpipes).
+Today, I will reproduce his examples using the recently extracted pipeline from [MassTransit](https://github.com/masstransit/masstransit) called [GreenPipes](https://github.com/phatboyg/greenpipes). Both MediatR and GreenPipes attempt to solve the same problem, building business pipelines _without_ using the underlying host framework.
 
 > This post assumes that you have read Jimmy's post.
 
