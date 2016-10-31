@@ -60,7 +60,7 @@ Ok, I think we can see where this is going. Jimmy lays out a great approach that
 
 In the end you might have something like this that you can hand off to the rest of the team.
 
-{% gist drusellers/cda975d202e263dc7f6ee31c1d906404 clean.cs %}
+{% gist drusellers/cda975d202e263dc7f6ee31c1d906404 Final.cs %}
 
 Wait! What is this `UseDynamicDispatch`? This is an extension method that opens up a set of configuration for doing dynamic dispatch based on the message type and getting to the correct consumers. This is how we can dispatch from `BusinessContext` to something like `BusinessContext<BusinessSocks>`.
 
