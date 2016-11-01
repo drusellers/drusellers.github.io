@@ -6,17 +6,17 @@ categories: greenpipes
 published: true
 ---
 
-Earlier this month, my colleague, [Jimmy Bogard](https://lostechies.com/jimmybogard/) posted a fantastically concise [article](https://lostechies.com/jimmybogard/2016/10/13/mediatr-pipeline-examples/) about how he composes an application pipeline for processing an application's various requests using his [MediatR](https://github.com/jbogard/MediatR) framework. He walks through step by step how he brings in each separate concern with code examples.
+Earlier this month, my colleague, [Jimmy Bogard](https://lostechies.com/jimmybogard/) posted a fantastically concise [article](https://lostechies.com/jimmybogard/2016/10/13/mediatr-pipeline-examples/) about how he composes an application pipeline for processing an application's various requests using his [MediatR](https://github.com/jbogard/MediatR) framework. He walks through, step by step, how he brings in each separate concern with code examples.
 
 Today, I will reproduce his examples using the recently extracted pipeline from [MassTransit](https://github.com/masstransit/masstransit) called [GreenPipes](https://github.com/phatboyg/greenpipes). Both MediatR and GreenPipes attempt to solve the same problem, building business pipelines _without_ using the underlying host framework.
 
-> This post assumes that you have read Jimmy's post.
+> This post assumes that you have read Jimmy's [post](https://lostechies.com/jimmybogard/2016/10/13/mediatr-pipeline-examples/).
 
 ## The Simplest pipeline
 
 {% gist drusellers/cda975d202e263dc7f6ee31c1d906404 BlankPipeline.cs %}
 
-In this example what we are seeing is the creation of a brand new pipeline, now since GreenPipes is different approach, the code will look different. The pipe part isn't interesting _at all yet_, and we have this new thing called a _[Context](http://blog.phatboyg.com/GreenPipes/texts/contexts/)_. The `BusinessContext` is a silly name for our demo but it represents the context of the request, follow the link to read more about contexts in depth via the budding GreenPipes documentation. But for now we can just think about it as our custom `HttpContext` like object.
+In this example what we are seeing is the creation of a brand new pipeline, now since GreenPipes is a different approach, the code will look different. The pipe isn't interesting _at all yet_, and we have this new thing called a _[Context](http://blog.phatboyg.com/GreenPipes/texts/contexts/)_. The context in this example, `BusinessContext`, is a silly name for our demo but what it represents is the context of the request, follow the link to read more about contexts in depth via the budding GreenPipes documentation. But for now we can just think about it as our custom `HttpContext` like object.
 
 ## Contextual Logging and Metrics
 
@@ -24,9 +24,9 @@ Ok, so step one is to add Serilog integration.
 
 {% gist drusellers/cda975d202e263dc7f6ee31c1d906404 SerilogFilter.cs %}
 
-So, here we can the biggest divergence from MediatR. In GreenPipes you compose your pipeline by building up a [set of filters for your pipeline](http://www.enterpriseintegrationpatterns.com/patterns/messaging/PipesAndFilters.html). In this simple case I am using the `InlineFilter` extension method which is great for prototyping out new filters. I will build the rest of the examples out using this method, but at the end I will share the suggested approach for building a reusable and sharable filter.
+Here we can a big divergence from MediatR. In GreenPipes you compose your pipeline by building up a [set of filters for your pipeline](http://www.enterpriseintegrationpatterns.com/patterns/messaging/PipesAndFilters.html). In this simple case I am using the `InlineFilter` extension method which is great for prototyping out new filters. I will build the rest of the examples out using this method, but at the end I will share the suggested approach for building a reusable and sharable filter.
 
-On line #5 above we are opening up this new `InlineFilter` which allows us to pass a lamda that takes in a `Context` mentioned above and it also passes the `next` pipe segment. This allows us to use the fantastic `using` pattern. Once inside of the using block we call `next.Send` passing down the context. This should look very similar to `OWIN` or any other similar framework. We purposefully kept this pattern; as its both powerful and well understood by the community.
+On line #5 above we are opening up this new `InlineFilter` which allows us to pass a lambda that takes in a `Context` mentioned above and it also passes the `next` pipe segment. This allows us to use the classic .Net `using` pattern. Once inside of the `using` block we call `next.Send` passing down the context. This should look a lot like `OWIN` or any other similar framework. We purposefully kept this pattern; as its both powerful and well understood by the community.
 
 How about some metrics?
 
@@ -40,11 +40,11 @@ Alright, lets get to something meaty! Let's follow Jimmy's lead and bake in some
 
 {% gist drusellers/cda975d202e263dc7f6ee31c1d906404 ValidationPipeline.cs %}
 
-Just like Jimmy's example we have a way to apply validation logic in consistent manner with just a single location at play. One thing that is not directly obvious in my example is how we end up handling the _contravariant_ aspect of validation that Jimmy points out. For that, I'll have to break out into our more complex model of supporting dynamic message models and how to build more complex filters. Which again, will happen at the end.
+Just like Jimmy's example we have a way to apply validation logic in consistent manner with just a single location at play. One thing that is not directly obvious in my example is how we end up handling the _contravariant_ aspect of validation that Jimmy points out. For that, we will have to dive into how GreenPipes does dynamic message dispatch which is really a blog post in its own right. You can see some of how it all works at the end in the filter creation at the end.
 
-An important item to note at this point is that when we throw the ValidationException it won't be caught by the sending code **UNLESS** it was `await`ed as this is heavily dependent on the TPL.
+An important item to note at this point is that when we throw the ValidationException it won't be caught by the sending code **UNLESS** it was `await`ed as GreenPipes heavily leverages the TPL and its patterns.
 
-If pass validation, we then call `next.Send(cxt)` other wise we throw our exception and stop processing.
+If the context passes validation, we then call `next.Send(cxt)` other wise we throw our exception and stop processing.
 
 ## Authorization
 
@@ -54,15 +54,15 @@ Authorization is similar to Fluent Validation above, so not much to explain here
 
 ## Pre/Post Processing
 
-Ok, I think we can see where this is going. Jimmy lays out a great approach that is easy to follow as well. I'll leave this bit as an exercise up to the reader.
+By now I hope you can see where this is going. Jimmy lays out a great approach that is easy to follow as well. I'll leave this bit as an exercise up to the reader.
 
 ## The Overview at the End
 
-In the end you might have something like this that you can hand off to the rest of the team.
+In the end you might have something like this that you can hand off to the rest of the team. Not the prettiest thing out there, and not nearly as pretty as what Jimmy has laid out.
 
 {% gist drusellers/cda975d202e263dc7f6ee31c1d906404 Final.cs %}
 
-Wait! What is this `UseDynamicDispatch`? This is an extension method that opens up a set of configuration for doing dynamic dispatch based on the message type and getting to the correct consumers. This is how we can dispatch from `BusinessContext` to something like `BusinessContext<BusinessSocks>`.
+Wait! What is this `UseDynamicDispatch`? This is an extension method that opens up a set of configuration for doing dynamic dispatch based on the message type and getting to the correct consumers. This is how we can dispatch from `BusinessContext` to something like `BusinessContext<BusinessSocks>`. I'll have to save explaining it in detail, as I said earlier about the _contravarient_ handling, it really needs its own post.
 
 ## Finally, The Deep Dive
 
