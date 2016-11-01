@@ -124,7 +124,7 @@ The code for Fluent Validation looks just like MediatR but what is this other pi
 
 We can see that there is this other pipe for Validation Failures. If we fail validation, we immediately stop processing (by not calling `next.Send`) and divert down the `_validationFailurePipe`. Now this is a completely different pipe that can do all manner of things. I've used it to still save my users data, but then send out an email to that user alerting them to issues (please note, I rarely write UI oriented code). MassTransit has used this to take messages that have become poisonous and divert them to a poison message queue. All of this and more and you can control just how far and deep you want to go at each level. This is the power you get in exchange for the complexity of not having a direct return value.
 
-> That said, you may be looking at me ಠ_ಠ like, "Dru, I _NEED_ return values." I completely understand and I've felt that pain. I present to you my very simple pattern for handling this. Whatever you want for a return value, just stuff it in the `cxt` variable, then if you `await` the `Send` you can pull that data back out of the `PipeContext`. BOOM.
+> That said, you may be looking at me ಠ_ಠ like, "Dru, I _NEED_ return values." I completely understand and I've felt that pain. Chris and I are still working on how to best make this a reusable pattern - but the whole picture looks a bit [like this](https://gist.github.com/phatboyg/0e3ef1029d29195997ca8d046d0d384f). The basic pattern is that your context has a way to "set" a return value. If that property is of type `Task<T>` you can then `await` on that property of your context. Then if you wrap that in an extension method your send can now be a `Request`.
 
 
 ## In closing
