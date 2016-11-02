@@ -25,7 +25,7 @@ Ok, so step one is to add Serilog integration.
 
 {% gist drusellers/cda975d202e263dc7f6ee31c1d906404 SerilogFilter.cs %}
 
-Here we can a big divergence from MediatR. In GreenPipes you compose your pipeline by building up a [set of filters for your pipeline](http://www.enterpriseintegrationpatterns.com/patterns/messaging/PipesAndFilters.html). In this simple case I am using the `InlineFilter` extension method which is great for prototyping out new filters. I will build the rest of the examples out using this method, but at the end I will share the suggested approach for building a reusable and sharable filter.
+Here we can see a divergence from MediatR. In GreenPipes you compose your pipeline by building up a [set of filters for your pipeline](http://www.enterpriseintegrationpatterns.com/patterns/messaging/PipesAndFilters.html). In this simple case I am using the `InlineFilter` extension method which is great for prototyping out new filters. I will build the rest of the examples out using this method, but at the end I will share the suggested approach for building a reusable and sharable filter.
 
 On line #5 above we are opening up this new `InlineFilter` which allows us to pass a lambda that takes in a `Context` mentioned above and it also passes the `next` pipe segment. This allows us to use the classic .Net `using` pattern. Once inside of the `using` block we call `next.Send` passing down the context. This should look a lot like `OWIN` or any other similar framework. We purposefully kept this pattern; as its both powerful and well understood by the community.
 
