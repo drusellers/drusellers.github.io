@@ -40,7 +40,7 @@ Alright, lets get to something meaty! Let's follow Jimmy's lead and bake in some
 
 {% gist drusellers/cda975d202e263dc7f6ee31c1d906404 ValidationPipeline.cs %}
 
-Just like Jimmy's example we have a way to apply validation logic in consistent manner with just a single location at play. One thing that is not directly obvious in my example is how we end up handling the _contravariant_ aspect of validation that Jimmy points out. For that, we will have to dive into how GreenPipes does dynamic message dispatch which is really a blog post in its own right. You can see some of how it all works at the end in the filter creation at the end.
+Just like Jimmy's example we have a way to apply validation logic in consistent manner with just a single location at play. One thing that is not directly obvious in my example is how we end up handling the _contravariant_ aspect of validation that Jimmy points out. For that, we will have to dive into how GreenPipes does dynamic message dispatch in another blog post. For now I'll have to tempt you with a [unit test](https://github.com/phatboyg/GreenPipes/blob/develop/src/GreenPipes.Tests/Dispatch_Specs.cs) from the code base. You can see some of how it all works at the end in the filter creation at the end.
 
 An important item to note at this point is that when we throw the ValidationException it won't be caught by the sending code **UNLESS** it was `await`ed as GreenPipes heavily leverages the TPL and its patterns.
 
@@ -133,12 +133,12 @@ The goal again was to show case a different approach to building out a pipeline 
 
 - Synchronous Model by Default (pretty sure nothing is preventing you from doing TPL in `IRequestHandler` though)
 - Simple to build and get an overview of the pipeline.
+- No extra infrastructure code required
 - Composed via static code
 
 ### GreenPipes
 
 - Async Model by Default
 - Ability to build dynamic and complex pipelines to suit business needs
-- Full support for dynamic tracing of pipelines with `Probe` feature
-- Full support for validating filters
+- Requires you to build some infrastructure code to get dynamic probe tracing and filter validation working
 - Composed via filter objects
