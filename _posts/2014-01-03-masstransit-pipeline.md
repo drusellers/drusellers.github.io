@@ -4,6 +4,7 @@ title:  "Building a Pipeline in MassTransit"
 date:   2014-01-03 05:58:21
 categories: masstransit
 published: false
+disqus_id: b90bcc77-b92d-4c7e-b378-5dbbeafee31f
 ---
 
 At my new [employer](http://amplifier.com) we are rebuilding our order processing

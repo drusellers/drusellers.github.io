@@ -4,6 +4,7 @@ title:  "Application Instance"
 date:   2014-09-11 05:58:21
 categories: architecture
 published: true
+disqus_id: 08ce23a5-687d-4dc0-8d9e-921ff8270590
 ---
 
 So, if [IoC is the Context](% post_url 2013-12-09-ioc-as-context %}) how do we

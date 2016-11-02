@@ -3,6 +3,7 @@ layout: post
 title:  "Greasy Testing"
 date:   2013-12-09 09:58:21
 categories: testing
+disqus_id: 612fe097-a8e3-4ebb-aa31-b54ae4501783
 ---
 
 When I accepted the job to work for Dovetail Software, one of the things that

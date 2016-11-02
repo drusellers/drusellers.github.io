@@ -4,6 +4,7 @@ title:  "Green Pipes"
 date:   2016-10-30 05:58:21
 categories: greenpipes
 published: true
+disqus_id: 6bb5bfc7-56d2-493a-9faf-e9bd678f190f
 ---
 
 Earlier this month, my colleague, [Jimmy Bogard](https://lostechies.com/jimmybogard/) posted a fantastically concise [article](https://lostechies.com/jimmybogard/2016/10/13/mediatr-pipeline-examples/) about how he composes an application pipeline for processing an application's various requests using his [MediatR](https://github.com/jbogard/MediatR) framework. He walks through, step by step, how he brings in each separate concern with code examples.

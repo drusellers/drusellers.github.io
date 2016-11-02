@@ -3,6 +3,7 @@ layout: post
 title:  "The Value of the Value Proposition"
 date:   2013-06-12 09:58:21
 categories: business
+disqus_id: d106b9a3-938d-49cb-b129-921e8a9d9414
 ---
 
 Whenever I hear about some businesses 'Value Proposition' I almost always

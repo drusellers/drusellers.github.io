@@ -3,6 +3,7 @@ layout: post
 title:  "Canary"
 date:   2013-06-13 09:58:21
 categories: architecture
+disqus_id: 5e4f9156-093f-4659-9042-320f62796163
 ---
 
 Do you have a canary in your organization?

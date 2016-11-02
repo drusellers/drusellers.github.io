@@ -3,6 +3,7 @@ layout: post
 title:  "The Container is the Context"
 date:   2013-12-09 05:58:21
 categories:
+disqus_id: 886929f5-804a-47c9-90f3-37cc870711b3
 ---
 
 The container is the app context. When I am building a piece of sufficiently

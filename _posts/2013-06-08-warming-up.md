@@ -5,6 +5,7 @@ date:   2013-06-08 05:58:21
 categories:
   - random
   - post
+disqus_id: ff81e2ae-56a6-4749-8f57-728f6851b740
 ---
 
 How do we communicate? Passing information between our human brain holes
