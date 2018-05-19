@@ -1,22 +1,28 @@
-<hr />
+<hr /> {{ page.relative_path }}
 <div class="mw6 center">
   <div class="footer pa3 cf">
     <div class="fl w-50-ns w-100 pr2-ns">
       <h3 class="measure lh-title">Props</h3>
-      <p class="measure lh-copy">Logo design by the <a href="http://www.theagilebadger.com" target="_blank">Agile Badger</a></p>
-      <p class="measure lh-copy">Photo by <a href="http://www.dannyhotea.com/" target="_blank">Danny Hotea</a></p>
+      <p class="measure lh-copy">Logo design by the
+        <a href="http://www.theagilebadger.com" target="_blank">Agile Badger</a>
+      </p>
+      <!--
+      <p class="measure lh-copy">Photo by
+        <a href="http://www.dannyhotea.com/" target="_blank">Danny Hotea</a>
+      </p>
+      -->
     </div>
     <div class="fl w-50-ns w-100 pl2-ns">
       <h3 class="measure lh-title">Boring</h3>
       <p class="measure lh-copy">
-      Copyright since &copy; 1997
-      <a rel="license" href="http://creativecommons.org/licenses/by/3.0/us/">
-        <img alt="Creative Commons License" style="border-width:0;" src="http://i.creativecommons.org/l/by/3.0/us/80x15.png"/>
-      </a>
+        Copyright since &copy; 1997
+        <a rel="license" href="http://creativecommons.org/licenses/by/3.0/us/">
+          <img alt="Creative Commons License" style="border-width:0;" src="https://licensebuttons.net/l/by/3.0/us/80x15.png" />
+        </a>
 
-      This work is licensed under a
+        This work is licensed under a
 
-      <a rel="license" href="http://creativecommons.org/licenses/by/3.0/us/">Creative Commons Attribution 3.0 United States License</a>.
+        <a rel="license" href="http://creativecommons.org/licenses/by/3.0/us/">Creative Commons Attribution 3.0 United States License</a>.
       </p>
     </div>
 
@@ -28,7 +34,11 @@
   <h3 class="measure lh-title">Topics</h3>
   <ul class="inline">
     {% for tag in site.tags %}
-      <li><a href="{{ url_root }}#{{ tag[0] }}-ref">{{ tag[0] }} <span>({{ tag[1].size }})</span></a></li>
+    <li>
+      <a href="{{ url_root }}#{{ tag[0] }}-ref">{{ tag[0] }}
+        <span>({{ tag[1].size }})</span>
+      </a>
+    </li>
     {% endfor %}
   </ul>
 </div>

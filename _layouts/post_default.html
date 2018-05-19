@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html>
 
-  {% include head.html %}
+{% include head.html %}
 
-  <body id="{{ page.bodyId }}">
-    {% include gtm.html %}
-    {{ content }}
+<body id="{{ page.bodyId }}">
+  {% include analytics.html %}
+  {{ content }}
 
-    <div style="clear:both;"></div>
+  <div style="clear:both;"></div>
 
-    {% include footer.html %}
+  {% include footer.html %}
 
-  </body>
+</body>
 
 </html>

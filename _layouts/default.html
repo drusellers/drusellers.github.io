@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html>
 
-  {% include head.html %}
+{% include head.html %}
 
-  <body id="{{ page.bodyId }}">
-    {% include gtm.html %}
-    {% include header.html %}
+<body id="{{ page.bodyId }}">
+  {% include analytics.html %} 
+  {% include header.html %}
 
-    <div style="clear:both;"></div>
+  <div style="clear:both;"></div>
 
-    {{ content }}
+  {{ content }}
 
-    <div style="clear:both;"></div>
+  <div style="clear:both;"></div>
 
-    {% include footer.html %}
+  {% include footer.html %}
 
-  </body>
+</body>
 
 </html>

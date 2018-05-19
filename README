@@ -1,0 +1,8 @@
+CDN at CloudFlare.com
+SSL via CloudFlare.com
+HSTS is on at CloudFlare.com
+
+
+www -- redirects --> to APEX via GitHub pages
+
+Currently using Google Tag Manager to turn on Google Analytics
